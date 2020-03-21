@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Verificador de Idade</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font: normal 15pt;
+        }
+        h1{
+            text-align: center;
+            margin: 5px 0 10px 0;
+            color: white;
+        }
+        body{
+            background-color: blue;
+        }
+        section{
+            text-align: center;
+            background-color: white;
+            width: 350px;
+            padding: 40px;
+            margin: auto;
+            border-radius: 20px;
+            box-shadow: 5px 5px black;
+        }
+        img{
+            margin: 10px;
+            width: 250px;
+            border-radius: 200px;
+        }
+        img:hover{
+            cursor: pointer;
+        }
+        input[type="button"]{
+            margin-bottom: 10px;
+        }
+        section input[type="number"]:defined{
+            border: solid black 1px;
+            box-shadow: 3px 3px black;
+        }
+        section input{
+            margin-top: 10px;
+        }
+        section input[type="radio"]:hover{
+            cursor: pointer;
+        }
+        section input[type="button"]:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Verificador de Idade</h1>
+    <section>
+        <div>
+            <p>
+                Ano de Nascimento: <input type="number" name="ano" id="ano" min="0">
+            </p>
+            <p>
+                Sexo: <input type="radio" name="genero" id="Masculino"> 
+                <label for="Masculino">Masculino</label>
+                <input type="radio" name="genero" id="Feminino">
+                <label for="Feminino">Feminino</label>
+            </p>
+            <p>
+                <input type="button" value="Verificador" onclick="verificar()">
+            </p>
+        </div>
+        <div id="foto">
+            <span id="res"></span>
+            <span id="msg"></span>
+        </div>
+    </section>
+    <script>
+        function verificar(){
+            var ano_atual = new Date(); // objeto 
+            var ano = ano_atual.getFullYear(); // pegando o ano
+            var nasc = document.getElementById('ano').value; // ano de nascimento no input
+            var genero = document.getElementsByName('genero'); // sexo
+            var res = document.getElementById('res'); // span
+            var img = document.createElement('img'); // criando uma tag img
+            var msg = document.getElementById('msg');
+            var idade = ano - nasc;
+            if(nasc < 0 || nasc > ano || nasc.length == 0){
+                alert("ERRO!! DIGITE UM VALOR VÁLIDO OU ENTÃO PREENCHA O CAMPO");
+            }else{
+                if(genero[0].checked){
+                    if(idade >= 0 && idade <= 10){
+                        genero = "Homem";
+                        img.setAttribute("src", "bebehomem.jpg");
+                        img.setAttribute("alt", "Foto do Bebê");
+                        img.setAttribute("title", "Foto do Bebê Masculino");
+                        img.style.height = "250px";
+                        res.innerHTML = `<strong>Detectamos um ${genero} de ${idade} anos.</strong>`;
+                    }else if(idade <= 18){
+                        genero = "Homem";
+                        img.setAttribute("src", "jovemhomem.jpg");
+                        img.setAttribute("alt", "Foto do Jovem Masculino");
+                        img.setAttribute("title", "Foto do Jovem Masculino");
+                        img.style.height = "250px";
+                        res.innerHTML = `<strong>Detectamos um ${genero} de ${idade} anos.</strong>`;
+                    }else if(idade <= 50){
+                        genero = "Homem";
+                        img.setAttribute("src", "adultohomem.jpg");
+                        img.setAttribute("alt", "Foto do Adulto Masculino");
+                        img.setAttribute("title", "Foto do Adulto Masculino");
+                        img.style.height = "250px";
+                        res.innerHTML = `<strong>Detectamos um ${genero} de ${idade} anos.</strong>`;
+                    }else{
+                        genero = "Homem";
+                        img.setAttribute("src", "idosohomem.jpg");
+                        img.setAttribute("alt", "Foto do Idoso Masculino");
+                        img.setAttribute("title", "Foto do Idoso Masculino");
+                        img.style.height = "250px";
+                        res.innerHTML = `<strong>Detectamos um ${genero} de ${idade} anos.</strong>`;
+                    }
+                }else if(genero[1].checked){
+                    if(idade >= 0 && idade <= 10){
+                        genero = "Mulher";
+                        img.setAttribute("src", "bebemulher.jpg");
+                        img.setAttribute("alt", "Foto da Bebê");
+                        img.setAttribute("title", "Foto da Bebê Feminino");
+                        img.style.height = "250px";
+                        res.innerHTML = `<strong>Detectamos um ${genero} de ${idade} anos.</strong>`;
+                    }else if(idade <= 18){
+                        genero = "Mulher";
+                        img.setAttribute("src", "jovemmulher.jpg");
+                        img.setAttribute("alt", "Foto da Jovem Feminino");
+                        img.setAttribute("title", "Foto da Jovem Feminino");
+                        img.style.height = "250px";
+                        res.innerHTML = `<strong>Detectamos um ${genero} de ${idade} anos.</strong>`;
+                    }else if(idade <= 50){
+                        genero = "Mulher";
+                        img.setAttribute("src", "adultomulher.jpg");
+                        img.setAttribute("alt", "Foto da Adulta Feminino");
+                        img.setAttribute("title", "Foto da Adulta Feminino");
+                        img.style.height = "250px";
+                        res.innerHTML = `<strong>Detectamos um ${genero} de ${idade} anos.</strong>`;
+                    }else{
+                        genero = "Mulher";
+                        img.setAttribute("src", "idosamulher.jpg");
+                        img.setAttribute("alt", "Foto da Idosa Feminino");
+                        img.setAttribute("title", "Foto da Idosa Feminino");
+                        img.style.height = "250px";
+                        res.innerHTML = `<strong>Detectamos um ${genero} de ${idade} anos.</strong>`;
+                    }
+                }else{
+                    alert("MARQUE UM CAMPO");
+                }
+                res.appendChild(img);
+            }
+        }
+    </script>
+</body>
+</html>
